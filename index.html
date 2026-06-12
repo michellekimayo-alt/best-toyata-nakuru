@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toyota Kenya Hub — Your Trusted Mobility Partner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1d1e;
+    --ink-soft:#2c3133;
+    --red:#e2001a;
+    --red-deep:#a8000f;
+    --sand:#cda06a;
+    --sand-pale:#f4ead9;
+    --cream:#f7f4ee;
+    --grey:#6b7280;
+    --line:#e4ded3;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Archivo Black',sans-serif;
+    line-height:1.05;
+    letter-spacing:-0.01em;
+  }
+  .mono{font-family:'Space Mono',monospace; letter-spacing:0.04em;}
+
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+  /* ===== Buttons ===== */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:15px 30px;
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    border-radius:4px;
+    border:2px solid transparent;
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, background .2s ease, color .2s ease;
+    white-space:nowrap;
+  }
+  .btn:focus-visible{outline:3px solid var(--sand); outline-offset:2px;}
+  .btn-primary{
+    background:var(--red);
+    color:#fff;
+    box-shadow:0 6px 0 var(--red-deep);
+  }
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 8px 0 var(--red-deep);}
+  .btn-primary:active{transform:translateY(2px); box-shadow:0 2px 0 var(--red-deep);}
+  .btn-ghost{
+    background:transparent;
+    border:2px solid var(--ink);
+    color:var(--ink);
+  }
+  .btn-ghost:hover{background:var(--ink); color:#fff;}
+  .btn-light{
+    background:#fff;
+    color:var(--ink);
+  }
+  .btn-light:hover{background:var(--sand-pale);}
+
+  /* ===== Top bar ===== */
+  .topbar{
+    background:var(--ink);
+    color:#cfd3d4;
+    font-size:0.8rem;
+  }
+  .topbar .wrap{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:10px 24px;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .topbar a{transition:color .15s;}
+  .topbar a:hover{color:#fff;}
+  .topbar .contacts{display:flex;gap:24px;align-items:center;}
+  .topbar .badge-pill{
+    color:var(--sand);
+    font-family:'Space Mono',monospace;
+    letter-spacing:0.08em;
+    font-size:0.72rem;
+  }
+
+  /* ===== Nav ===== */
+  nav{
+    background:var(--cream);
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:50;
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;}
+  .logo{display:flex;align-items:center;gap:10px;font-size:1.25rem;}
+  .logo .mark{
+    width:38px;height:38px;border-radius:50%;
+    background:var(--red);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-family:'Archivo Black';font-size:1.1rem;
+    flex-shrink:0;
+  }
+  .logo .sub{display:block; font-family:'Inter'; font-weight:600; font-size:0.7rem; color:var(--grey); letter-spacing:0.08em; text-transform:uppercase;}
+  .navlinks{display:flex;gap:32px;font-weight:600;font-size:0.95rem;}
+  .navlinks a{position:relative;padding:4px 0;transition:color .15s;}
+  .navlinks a:hover{color:var(--red);}
+  .navlinks a::after{
+    content:'';position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--red);
+    transition:width .2s ease;
+  }
+  .navlinks a:hover::after{width:100%;}
+  .nav-cta{display:flex;align-items:center;gap:16px;}
+  .nav-toggle{display:none;}
+
+  @media (max-width:860px){
+    .navlinks{display:none;}
+    .nav-cta .btn-ghost{display:none;}
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    background:linear-gradient(160deg, var(--ink) 0%, var(--ink-soft) 55%, #3a3027 100%);
+    color:#fff;
+    overflow:hidden;
+    padding:90px 0 0;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+    align-items:center;
+    padding-bottom:60px;
+  }
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'Space Mono',monospace;
+    font-size:0.78rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--sand);
+    background:rgba(226,0,26,0.12);
+    border:1px solid rgba(205,160,106,0.35);
+    padding:8px 14px;border-radius:30px;
+    margin-bottom:24px;
+  }
+  .hero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(226,0,26,0.18);}
+  .hero h1{
+    font-size:clamp(2.6rem, 5.4vw, 4.4rem);
+    margin-bottom:24px;
+  }
+  .hero h1 .accent{color:var(--red);}
+  .hero h1 .stroke{
+    color:transparent;
+    -webkit-text-stroke:1.5px var(--sand);
+  }
+  .hero p.lead{
+    font-size:1.15rem;
+    color:#d6d4cf;
+    max-width:520px;
+    margin-bottom:36px;
+  }
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px;}
+
+  .hero-stats{
+    display:flex;gap:40px;
+    border-top:1px solid rgba(255,255,255,0.12);
+    padding-top:28px;
+    flex-wrap:wrap;
+  }
+  .hero-stats .stat-num{
+    font-family:'Archivo Black';
+    font-size:1.9rem;
+    color:#fff;
+  }
+  .hero-stats .stat-num span{color:var(--sand);}
+  .hero-stats .stat-label{
+    font-size:0.78rem;color:#aeb0ad;
+    text-transform:uppercase;letter-spacing:0.08em;
+    margin-top:4px;
+  }
+
+  /* Hero visual: layered vehicle cards */
+  .hero-visual{position:relative; height:480px;}
+  .car-card{
+    position:absolute;
+    background:#fff;
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.55);
+    color:var(--ink);
+    width:280px;
+  }
+  .car-card .ribbon{
+    display:inline-block;
+    background:var(--red);color:#fff;
+    font-size:0.68rem;font-weight:700;letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:4px 10px;border-radius:3px;
+    margin-bottom:10px;
+  }
+  .car-card h3{font-family:'Inter';font-size:1.15rem;font-weight:800;margin-bottom:4px;}
+  .car-card .price{font-family:'Space Mono';color:var(--red);font-weight:700;font-size:1.05rem;}
+  .car-card .specs{display:flex;gap:14px;margin-top:12px;font-size:0.78rem;color:var(--grey);font-weight:600;}
+  .car-card.card-a{top:0;left:10%;transform:rotate(-4deg); animation:floatA 7s ease-in-out infinite;}
+  .car-card.card-b{bottom:30px;right:0;transform:rotate(3deg); animation:floatB 8s ease-in-out infinite;}
+  @keyframes floatA{0%,100%{transform:rotate(-4deg) translateY(0);}50%{transform:rotate(-4deg) translateY(-14px);}}
+  @keyframes floatB{0%,100%{transform:rotate(3deg) translateY(0);}50%{transform:rotate(3deg) translateY(-10px);}}
+
+  .hero-visual .ring{
+    position:absolute;inset:0;
+    border:1px dashed rgba(205,160,106,0.3);
+    border-radius:50%;
+    width:380px;height:380px;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+  }
+
+  @media (max-width:980px){
+    .hero .wrap{grid-template-columns:1fr; padding-bottom:40px;}
+    .hero-visual{height:340px; margin-top:20px;}
+    .car-card{width:230px;}
+  }
+
+  /* ===== Terrain strip — SIGNATURE ELEMENT ===== */
+  .terrain{
+    position:relative;
+    height:64px;
+    background:var(--sand);
+    overflow:hidden;
+  }
+  .terrain svg{display:block;width:100%;height:100%;}
+  .terrain .label{
+    position:absolute;
+    font-family:'Space Mono',monospace;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink);
+    top:50%;transform:translateY(-50%);
+    opacity:0.55;
+  }
+  .terrain .label.left{left:24px;}
+  .terrain .label.right{right:24px;}
+
+  /* ===== Section base ===== */
+  section{padding:88px 0;}
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:0.78rem;letter-spacing:0.16em;
+    text-transform:uppercase;color:var(--red);
+    margin-bottom:14px;display:block;
+  }
+  .section-head h2{font-size:clamp(1.9rem, 3.6vw, 2.7rem);margin-bottom:18px;}
+  .section-head p{color:var(--grey);font-size:1.05rem;max-width:540px;}
+
+  /* ===== Why choose us — selection grid ===== */
+  .why{background:var(--cream);}
+  .why-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .why-card{
+    background:#fff;
+    padding:34px 28px;
+    transition:background .2s ease;
+  }
+  .why-card:hover{background:var(--sand-pale);}
+  .why-card .icon{
+    width:46px;height:46px;
+    border-radius:10px;
+    background:var(--ink);
+    color:var(--sand);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Archivo Black';
+    font-size:1.2rem;
+    margin-bottom:20px;
+  }
+  .why-card h3{font-family:'Inter';font-size:1.05rem;font-weight:800;margin-bottom:8px;}
+  .why-card p{font-size:0.92rem;color:var(--grey);}
+
+  @media (max-width:980px){.why-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.why-grid{grid-template-columns:1fr;}}
+
+  /* ===== Inventory ===== */
+  .inventory{background:var(--ink); color:#fff;}
+  .inventory .section-head .eyebrow{color:var(--sand);}
+  .inventory .section-head p{color:#b6b8b5;}
+  .inventory .section-head h2{color:#fff;}
+
+  .filter-row{
+    display:flex;gap:10px;margin-bottom:40px;flex-wrap:wrap;
+  }
+  .filter-pill{
+    font-family:'Space Mono',monospace;
+    font-size:0.78rem;letter-spacing:0.05em;
+    padding:9px 18px;border-radius:30px;
+    border:1px solid rgba(255,255,255,0.18);
+    color:#cfd3d4;
+    background:transparent;
+  }
+  .filter-pill.active{background:var(--red);border-color:var(--red);color:#fff;}
+
+  .inv-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  .inv-card{
+    background:var(--ink-soft);
+    border-radius:12px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.06);
+    transition:transform .25s ease, border-color .25s ease;
+  }
+  .inv-card:hover{transform:translateY(-6px); border-color:var(--sand);}
+  .inv-img{
+    height:170px;
+    background:linear-gradient(135deg, #3a3027 0%, #1a1d1e 100%);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .inv-img::before{
+    content:'';
+    position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(135deg, rgba(205,160,106,0.07) 0px, rgba(205,160,106,0.07) 2px, transparent 2px, transparent 18px);
+  }
+  .inv-img .silhouette{
+    font-family:'Archivo Black';
+    font-size:1.1rem;
+    color:rgba(255,255,255,0.18);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    z-index:1;
+  }
+  .inv-tag{
+    position:absolute;top:14px;left:14px;
+    background:var(--red);color:#fff;
+    font-size:0.68rem;font-weight:700;letter-spacing:0.06em;
+    text-transform:uppercase;padding:4px 10px;border-radius:3px;z-index:2;
+  }
+  .inv-body{padding:22px;}
+  .inv-body h3{font-family:'Inter';font-weight:800;font-size:1.15rem;margin-bottom:6px;}
+  .inv-body .sub{font-size:0.85rem;color:#9a9d9a;margin-bottom:14px;}
+  .inv-body .price{
+    font-family:'Space Mono';
+    color:var(--sand);
+    font-size:1.2rem;font-weight:700;
+    margin-bottom:18px;
+  }
+  .inv-body .price small{color:#9a9d9a;font-size:0.7rem;font-weight:400;}
+  .inv-body .btn{width:100%;justify-content:center;}
+
+  @media (max-width:980px){.inv-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:640px){.inv-grid{grid-template-columns:1fr;}}
+
+  /* ===== Financing ===== */
+  .finance{background:var(--sand-pale);}
+  .finance .wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+  }
+  .finance-card{
+    background:var(--ink);
+    color:#fff;
+    border-radius:16px;
+    padding:40px;
+    position:relative;
+    overflow:hidden;
+  }
+  .finance-card::after{
+    content:'';position:absolute;
+    width:240px;height:240px;border-radius:50%;
+    background:var(--red);
+    opacity:0.15;
+    right:-80px;bottom:-100px;
+  }
+  .finance-card .big{
+    font-family:'Archivo Black';
+    font-size:clamp(2.2rem,4vw,3rem);
+    color:var(--sand);
+    margin-bottom:6px;
+  }
+  .finance-card .big small{color:#fff;font-size:0.5em;display:block;font-family:'Inter';font-weight:700;letter-spacing:0.06em;}
+  .finance-card ul{list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:14px;position:relative;z-index:2;}
+  .finance-card li{display:flex;gap:12px;align-items:flex-start;font-size:0.95rem;color:#d6d4cf;}
+  .finance-card li .check{
+    color:var(--red);font-family:'Archivo Black';flex-shrink:0;
+    width:22px;height:22px;border-radius:50%;background:rgba(226,0,26,0.18);
+    display:flex;align-items:center;justify-content:center;font-size:0.8rem;
+  }
+  .finance ul.benefits{list-style:none;display:flex;flex-direction:column;gap:24px;}
+  .finance ul.benefits li{display:flex;gap:18px;align-items:flex-start;}
+  .finance ul.benefits .num{
+    font-family:'Space Mono';color:var(--red);font-weight:700;font-size:0.9rem;
+    border:1.5px solid var(--red);border-radius:50%;
+    width:34px;height:34px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .finance ul.benefits h4{font-size:1.05rem;margin-bottom:4px;font-weight:800;}
+  .finance ul.benefits p{font-size:0.92rem;color:var(--grey);}
+
+  @media (max-width:900px){.finance .wrap{grid-template-columns:1fr; gap:40px;}}
+
+  /* ===== Trade-in ===== */
+  .tradein{
+    background:var(--red);
+    color:#fff;
+    text-align:center;
+    padding:80px 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .tradein::before, .tradein::after{
+    content:'';position:absolute;border-radius:50%;
+    background:rgba(255,255,255,0.08);
+  }
+  .tradein::before{width:300px;height:300px;top:-150px;left:-100px;}
+  .tradein::after{width:220px;height:220px;bottom:-110px;right:5%;}
+  .tradein h2{font-size:clamp(1.9rem,4vw,2.8rem);margin-bottom:16px;position:relative;z-index:2;}
+  .tradein p{max-width:560px;margin:0 auto 32px;color:#ffe1e4;font-size:1.05rem;position:relative;z-index:2;}
+  .tradein .btn{position:relative;z-index:2;}
+
+  /* ===== Testimonial / quote ===== */
+  .quote{background:var(--cream);}
+  .quote .wrap{
+    display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:64px 24px;
+  }
+  .quote .mark{
+    font-family:'Archivo Black';font-size:5rem;color:var(--sand);line-height:1;
+  }
+  .quote blockquote{
+    font-family:'Archivo Black';
+    font-size:clamp(1.4rem,2.6vw,2.1rem);
+    line-height:1.25;
+    margin-bottom:18px;
+  }
+  .quote blockquote .accent{color:var(--red);}
+  .quote cite{font-size:0.9rem;color:var(--grey);font-style:normal;}
+
+  @media (max-width:700px){.quote .wrap{grid-template-columns:1fr;text-align:left;} .quote .mark{display:none;}}
+
+  /* ===== Contact / CTA ===== */
+  .contact{background:var(--ink);color:#fff;}
+  .contact .wrap{
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;
+  }
+  .contact .section-head .eyebrow{color:var(--sand);}
+  .contact .section-head h2{color:#fff;}
+  .contact .section-head p{color:#b6b8b5;}
+  .contact-list{display:flex;flex-direction:column;gap:22px;margin-top:8px;}
+  .contact-list .row{display:flex;gap:16px;align-items:flex-start;}
+  .contact-list .ic{
+    width:42px;height:42px;border-radius:10px;
+    background:rgba(226,0,26,0.14);color:var(--red);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Archivo Black';flex-shrink:0;
+  }
+  .contact-list .row h4{font-size:1rem;font-weight:800;margin-bottom:2px;}
+  .contact-list .row p{font-size:0.92rem;color:#b6b8b5;}
+
+  .contact-form{
+    background:var(--ink-soft);
+    border-radius:14px;
+    padding:36px;
+    border:1px solid rgba(255,255,255,0.06);
+  }
+  .contact-form h3{font-family:'Inter';font-weight:800;font-size:1.3rem;margin-bottom:6px;}
+  .contact-form .sub{color:#9a9d9a;font-size:0.9rem;margin-bottom:24px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:#9a9d9a;margin-bottom:8px;font-weight:700;}
+  .field input, .field select{
+    width:100%;padding:13px 14px;border-radius:6px;
+    border:1px solid rgba(255,255,255,0.12);
+    background:rgba(255,255,255,0.04);
+    color:#fff;font-family:'Inter';font-size:0.95rem;
+  }
+  .field input::placeholder{color:#6d716e;}
+  .field input:focus, .field select:focus{outline:2px solid var(--red); border-color:var(--red);}
+  .contact-form .btn{width:100%;justify-content:center;margin-top:6px;}
+
+  @media (max-width:900px){.contact .wrap{grid-template-columns:1fr;gap:40px;}}
+
+  /* ===== Footer ===== */
+  footer{background:#13161a;color:#9a9d9a;padding:50px 0 24px;font-size:0.9rem;}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;}
+  footer .col h4{color:#fff;font-family:'Inter';font-weight:800;margin-bottom:14px;font-size:0.95rem;}
+  footer .col a{display:block;color:#9a9d9a;margin-bottom:8px;transition:color .15s;}
+  footer .col a:hover{color:var(--sand);}
+  footer .bottom{
+    border-top:1px solid rgba(255,255,255,0.08);
+    margin-top:40px;padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    font-size:0.8rem;
+  }
+  footer .logo .mark{width:32px;height:32px;font-size:0.95rem;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="badge-pill">★ The most trusted name on Kenyan roads — limited stock, clear pricing</span>
+    <div class="contacts">
+      <a href="tel:+254115531131">📞 +254 115 531 131</a>
+      <a href="#contact">WhatsApp Us</a>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">
+      <span class="mark">TK</span>
+      <span>
+        Toyota Kenya Hub
+        <span class="sub">Your trusted mobility partner</span>
+      </span>
+    </a>
+    <div class="navlinks">
+      <a href="#inventory">Inventory</a>
+      <a href="#financing">Financing</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#financing" class="btn btn-ghost">Get Financing</a>
+      <a href="#contact" class="btn btn-primary">Book Test Drive</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="hero-eyebrow"><span class="dot"></span> Authorized Toyota Partner · Nairobi</span>
+      <h1>From the rugged terrains of the Rift Valley to the bustling streets of Nairobi — <span class="accent">we don't just sell cars.</span></h1>
+      <p class="lead">We deliver peace of mind. Every vehicle is inspected and prepared for Kenyan roads, highways, and national parks — built for every journey, with mind-of-every-mode reliability.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">Book a Test Drive Today →</a>
+        <a href="#inventory" class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,0.35);">View Our Stock</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">100<span>%</span></div>
+          <div class="stat-label">Verified vehicles</div>
+        </div>
+        <div>
+          <div class="stat-num"><span>47</span> Counties</div>
+          <div class="stat-label">Nationwide delivery</div>
+        </div>
+        <div>
+          <div class="stat-num">Ksh <span>280K</span></div>
+          <div class="stat-label">Flexible financing from</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="ring"></div>
+      <div class="car-card card-a">
+        <span class="ribbon">Hot Deal · Limited Stock</span>
+        <h3>Toyota Hilux Double Cab</h3>
+        <div class="price">Ksh 4.9M</div>
+        <div class="specs"><span>4WD</span><span>Diesel</span><span>2021</span></div>
+      </div>
+      <div class="car-card card-b">
+        <span class="ribbon" style="background:var(--ink);color:var(--sand);">Best Value</span>
+        <h3>Land Cruiser Prado</h3>
+        <div class="price">Ksh 8.5M</div>
+        <div class="specs"><span>Petrol</span><span>Auto</span><span>2020</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="terrain" aria-hidden="true">
+  <span class="label left">Tarmac · Nairobi CBD</span>
+  <span class="label right">Off-road · Rift Valley</span>
+  <svg viewBox="0 0 1200 64" preserveAspectRatio="none">
+    <path d="M0,32 L80,32 L120,18 L180,40 L240,10 L300,32 L360,32 L420,32 L460,22 L520,38 L580,32 L640,32 L700,8 L760,32 L820,32 L880,30 L940,16 L1000,32 L1060,32 L1120,32 L1200,32 L1200,64 L0,64 Z"
+          fill="var(--ink)"/>
+    <path d="M0,32 L80,32 L120,18 L180,40 L240,10 L300,32 L360,32 L420,32 L460,22 L520,38 L580,32 L640,32 L700,8 L760,32 L820,32 L880,30 L940,16 L1000,32 L1060,32 L1120,32 L1200,32"
+          fill="none" stroke="var(--red)" stroke-width="2"/>
+  </svg>
+</div>
+
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Why Kenyans Choose Us</span>
+      <h2>Built for trust, not just for show.</h2>
+      <p>We're a passionate Kenyan team dedicated to putting quality Toyota vehicles into the hands of buyers nationwide, with deep understanding of local roads and the customer experience that comes with it.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="icon">✓</div>
+        <h3>100% Verified Vehicles</h3>
+        <p>Every unit on our floor is inspected and prepared for daily Kenyan driving — no surprises after purchase.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">📍</div>
+        <h3>Nationwide Delivery</h3>
+        <p>We deliver to your doorstep, anywhere in Kenya. Buy with confidence from wherever you are.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">Ksh</div>
+        <h3>Flexible Financing</h3>
+        <p>Top bank and SACCO partnerships with flexible terms — drive away with what fits your finances.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">🔧</div>
+        <h3>Service & Benefit Plans</h3>
+        <p>1-month warranty, expert servicing, and insurance partnerships on all vehicles — comprehensive cover, included.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="inventory" id="inventory">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">See Our Stock — Best in the Market</span>
+      <h2>Wide selection, transparent pricing.</h2>
+      <p>From compact runabouts to family cruisers and off-road workhorses — every price you see is the price you pay. No hidden fees.</p>
+    </div>
+    <div class="filter-row">
+      <span class="filter-pill active">All Models</span>
+      <span class="filter-pill">Hilux</span>
+      <span class="filter-pill">Prado</span>
+      <span class="filter-pill">RAV4</span>
+      <span class="filter-pill">Corolla</span>
+      <span class="filter-pill">Fortuner</span>
+    </div>
+    <div class="inv-grid">
+      <div class="inv-card">
+        <div class="inv-img">
+          <span class="inv-tag">Issue up to Ksh 950K</span>
+          <span class="silhouette">Hilux Double Cab</span>
+        </div>
+        <div class="inv-body">
+          <h3>Toyota Hilux Double Cab</h3>
+          <div class="sub">2021 · Diesel · 4WD · 1.5M km</div>
+          <div class="price">Ksh 4,900,000 <small>· financing from Ksh 95K/mo</small></div>
+          <a href="#contact" class="btn btn-primary">Book a Test Drive</a>
+        </div>
+      </div>
+      <div class="inv-card">
+        <div class="inv-img">
+          <span class="inv-tag">Trusted Pick</span>
+          <span class="silhouette">Land Cruiser Prado</span>
+        </div>
+        <div class="inv-body">
+          <h3>Land Cruiser Prado TX</h3>
+          <div class="sub">2020 · Petrol · Automatic · 3.1M km</div>
+          <div class="price">Ksh 8,500,000</div>
+          <a href="#contact" class="btn btn-primary">Book a Test Drive</a>
+        </div>
+      </div>
+      <div class="inv-card">
+        <div class="inv-img">
+          <span class="inv-tag">New Arrival</span>
+          <span class="silhouette">RAV4 Hybrid</span>
+        </div>
+        <div class="inv-body">
+          <h3>Toyota RAV4 Hybrid</h3>
+          <div class="sub">2022 · Hybrid · Automatic · 600K km</div>
+          <div class="price">Ksh 4,750,000</div>
+          <a href="#contact" class="btn btn-primary">Book a Test Drive</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="finance" id="financing">
+  <div class="wrap">
+    <div>
+      <div class="section-head" style="margin-bottom:36px;">
+        <span class="eyebrow">Drive Today, Pay Monthly</span>
+        <h2>Unbeatable value. Best price in Kenya, guaranteed.</h2>
+        <p>Ready to drive home your new Toyota? Don't wait — the best deals move fast in Kenya.</p>
+      </div>
+      <ul class="benefits">
+        <li>
+          <span class="num">1</span>
+          <div><h4>Apply in minutes</h4><p>Tell us your preferred model and budget — get a same-day, best-detail decision straight to your WhatsApp.</p></div>
+        </li>
+        <li>
+          <span class="num">2</span>
+          <div><h4>The process was so smooth</h4><p>From application to handover, everything including financing is handled by our friendly, helpful staff.</p></div>
+        </li>
+        <li>
+          <span class="num">3</span>
+          <div><h4>Trade-in your old car</h4><p>Turn your current vehicle into cash or a deposit toward a new Toyota today.</p></div>
+        </li>
+      </ul>
+    </div>
+    <div class="finance-card">
+      <div class="big">Ksh 280K <small>Flexible deposit, financing options available</small></div>
+      <div class="big" style="margin-top:28px;">3.1M <small>kilometres of combined experience with Kenyan highways</small></div>
+      <ul>
+        <li><span class="check">✓</span> Authorized Toyota dealer — every vehicle backed by genuine parts and service history</li>
+        <li><span class="check">✓</span> Partnerships with top banks & SACCOs for flexible financing — Ksh 280,000 deposits accepted</li>
+        <li><span class="check">✓</span> Nationwide delivery — we'll get your Toyota to you, wherever you are in Kenya</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="tradein">
+  <div class="wrap">
+    <h2>Trade in your old car — turn it into your new Toyota today.</h2>
+    <p>After-sale support, genuine parts, and 1-month warranty servicing on all vehicles — get comprehensive coverage from day one.</p>
+    <a href="#contact" class="btn btn-light">Get Your Trade-In Quote →</a>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="wrap">
+    <div class="mark">"</div>
+    <div>
+      <blockquote>The most trusted name on Kenyan roads. <span class="accent">Issue up to Ksh 950,000 — thus much, and pay monthly.</span></blockquote>
+      <cite>— Toyota Kenya Hub Customer Promise</cite>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div>
+      <div class="section-head">
+        <span class="eyebrow">Ready to Drive Home?</span>
+        <h2>Book your test drive today.</h2>
+        <p>Unlock Kenya's road with confidence — premium Toyota vehicles at unbeatable prices. Each of our hubs has a place to lead to its own page.</p>
+      </div>
+      <div class="contact-list">
+        <div class="row">
+          <div class="ic">📞</div>
+          <div><h4>Call or WhatsApp</h4><p>+254 115 531 131 — Don't wait, the best deals move fast in Kenya.</p></div>
+        </div>
+        <div class="row">
+          <div class="ic">📍</div>
+          <div><h4>Visit our Nairobi Hub</h4><p>Toyota Kenya Hub — Mombasa & Eldoret / Thika Road, Nairobi</p></div>
+        </div>
+        <div class="row">
+          <div class="ic">🕒</div>
+          <div><h4>Hassle-free buying</h4><p>Test drives, 100% verified vehicles, and welcome 10% deposit options available.</p></div>
+        </div>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="return false;">
+      <h3>Your Most Trusted Name on Kenyan Roads</h3>
+      <p class="sub">Tell us what you're after — we'll match you to a vehicle and financing plan.</p>
+      <div class="field">
+        <label for="name">Full name</label>
+        <input id="name" type="text" placeholder="e.g. James Mwangi">
+      </div>
+      <div class="field">
+        <label for="phone">Phone number</label>
+        <input id="phone" type="tel" placeholder="07XX XXX XXX">
+      </div>
+      <div class="field">
+        <label for="model">Preferred model</label>
+        <select id="model">
+          <option>Toyota Hilux</option>
+          <option>Land Cruiser Prado</option>
+          <option>RAV4</option>
+          <option>Corolla</option>
+          <option>Fortuner</option>
+          <option>Not sure yet — recommend one</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="budget">Budget / deposit available</label>
+        <input id="budget" type="text" placeholder="e.g. Ksh 600,000">
+      </div>
+      <button class="btn btn-primary" type="submit">Book a Test Drive →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="col" style="max-width:280px;">
+      <a class="logo" href="#top" style="margin-bottom:14px;">
+        <span class="mark">TK</span>
+        <span style="color:#fff;font-weight:800;">Toyota Kenya Hub</span>
+      </a>
+      <p>Your trusted mobility partner — from the rugged Rift Valley to the streets of Nairobi.</p>
+    </div>
+    <div class="col">
+      <h4>Inventory</h4>
+      <a href="#inventory">Hilux Double Cab</a>
+      <a href="#inventory">Land Cruiser Prado</a>
+      <a href="#inventory">RAV4 Hybrid</a>
+    </div>
+    <div class="col">
+      <h4>Services</h4>
+      <a href="#financing">Financing & Loans</a>
+      <a href="#why">Service & Benefit Plans</a>
+      <a href="#contact">Trade-In Valuations</a>
+    </div>
+    <div class="col">
+      <h4>Contact</h4>
+      <a href="tel:+254115531131">+254 115 531 131</a>
+      <a href="#contact">WhatsApp Us</a>
+      <a href="#contact">Nairobi · Thika Road</a>
+    </div>
+  </div>
+  <div class="wrap bottom">
+    <span>© 2026 Toyota Kenya Hub. All rights reserved.</span>
+    <span>Authorized Toyota Partner · Nationwide Delivery</span>
+  </div>
+</footer>
+
+</body>
+</html>
